@@ -1,0 +1,33 @@
+#include <iostream>
+#include <map>
+#include <set>
+#include <string>
+
+int main() {
+    std::map<std::string, std::set<std::string>> synonyms;
+    int Q;
+    std::cin >> Q;
+    for (int i = 0; i < Q; ++i) {
+        std::string operation_code;
+        std::cin >> operation_code;
+        if (operation_code == "ADD") {
+            std::string word1, word2;
+            std::cin >> word1 >> word2;
+            synonyms[word1].insert(word2);
+            synonyms[word2].insert(word1);
+        } else if (operation_code == "COUNT") {
+            std::string word;
+            std::cin >> word;
+            std::cout << synonyms[word].size() << "\n";
+        } else if (operation_code == "CHECK") {
+            std::string word1, word2;
+            std::cin >> word1 >> word2;
+            if (synonyms[word1].count(word2) == 1) {
+                std::cout << "YES\n";
+            } else {
+                std::cout << "NO\n";
+            }
+        }
+    }
+    return 0;
+}
